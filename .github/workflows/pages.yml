@@ -1,25 +1,26 @@
 name: Deploy to GitHub Pages
+
 on:
-  workflow_dispatch:
   push:
     branches: [main]
+  workflow_dispatch:
+
 permissions:
   contents: read
   pages: write
   id-token: write
+
 jobs:
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on:
-  workflow_dispatch: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version:
-  workflow_dispatch: 20
+          node-version: 20
       - run: npm ci
       - run: npm run build
       - uses: actions/configure-pages@v4
